@@ -8,8 +8,8 @@ const create = async (_req: Request, res: Response) => {
     try {
         const order: Order = {
             status: _req.body.status,
-            userId: _req.body.userId,
-            productId: _req.body.productId,
+            user_id: _req.body.user_id,
+            product_id: _req.body.product_id,
             quantity: _req.body.quantity
         }
         const newOrder = await store.create(order)

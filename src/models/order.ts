@@ -4,8 +4,8 @@ import Client from '../database'
 export type Order = {
     id?: Number;
     status: String;
-    userId: Number;
-    productId: Number;
+    user_id: string;
+    product_id: string;
     quantity: Number;
 }
 
@@ -18,7 +18,7 @@ export class OrderStore {
       const conn = await Client.connect()
   
       const result = await conn
-          .query(sql, [o.status, o.userId, o.productId, o.quantity])
+          .query(sql, [o.status, o.user_id, o.product_id, o.quantity])
   
       const order = result.rows[0]
   
@@ -26,7 +26,7 @@ export class OrderStore {
   
       return order
         } catch (err) {
-            throw new Error(`Could not add new order ${o.status} ${o.userId} ${o.productId} ${o.quantity}. Error: ${err}`)
+            throw new Error(`Could not add new order ${o.status} ${o.user_id} ${o.product_id} ${o.quantity}. Error: ${err}`)
         }
     }
 

@@ -7,7 +7,7 @@ dotenv.config()
 const {BCRYPT_PASSWORD, SALT_ROUNDS} = process.env
 
 export type User = {
-    id?: Number;
+    id?: number;
     username: string;
     firstname?: string;
     lastname?: string;
@@ -17,7 +17,7 @@ export type User = {
 
 export class UserStore{
 
-    async create(u: User): Promise<User> {
+    async create(u: User): Promise<{"id":number, "username": string, "firstname":string, 'lastname':string}> {
         try {
       const sql = 'INSERT INTO users (username, firstname, lastname, password_digest) VALUES($1, $2, $3, $4) RETURNING *'
       // @ts-ignore
@@ -35,13 +35,13 @@ export class UserStore{
       
       conn.release()
   
-      return newUser
+      return {'id': newUser.id, "username": newUser.username, "firstname":newUser.firstname, 'lastname':newUser.lastname }
         } catch (err) {
             throw new Error(`Could not add new user ${u.username}. Error: ${err}`)
         }
     }
 
-    async index(): Promise<User[]> {
+    async index(): Promise<{"id":number, "username": string, "firstname":string, 'lastname':string}[]> {
         try {
           // @ts-ignore
           const conn = await Client.connect()
@@ -51,13 +51,18 @@ export class UserStore{
       
           conn.release()
       
-          return result.rows 
+          let arr:{"id":number, "username": string, "firstname":string, 'lastname':string}[] = []
+          result.rows.forEach((element: User) => {
+            arr.push({'id': element.id ?? 0, 'username': element.username, 'firstname':element.firstname ?? '', 'lastname':element.lastname ?? ''})
+          })
+
+          return arr
         } catch (err) {
           throw new Error(`Could not get users. Error: ${err}`)
         }
       }
     
-      async show(id: string): Promise<User> {
+      async show(id: string): Promise<{"id":number, "username": string, "firstname":string, 'lastname':string}> {
         try {
         const sql = 'SELECT * FROM users WHERE id=($1)'
         // @ts-ignore
@@ -67,7 +72,7 @@ export class UserStore{
     
         conn.release()
     
-        return result.rows[0]
+        return {'id': result.rows[0].id, "username": result.rows[0].username, "firstname":result.rows[0].firstname, 'lastname':result.rows[0].lastname }
         } catch (err) {
             throw new Error(`Could not find user ${id}. Error: ${err}`)
         }

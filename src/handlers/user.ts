@@ -16,9 +16,7 @@ const create = async (_req: Request, res: Response) => {
 
         const newUser = await store.create(user)
 
-        var token = jwt.sign({user: newUser}, process.env.TOKEN_SECRET!)
-
-        res.json(token)
+        res.json(newUser)
     } catch(err) {
         res.status(400)
         res.json(err)
