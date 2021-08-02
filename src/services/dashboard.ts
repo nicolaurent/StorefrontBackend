@@ -58,7 +58,7 @@ export class DashboardQueries{
         try{
             // @ts-ignore
             const conn = await Client.connect();
-            const sql = 'SELECT * FROM products ORDER BY price DESC LIMIT 5';
+            const sql = 'SELECT name, price, category, SUM(quantity) FROM products INNER JOIN orders ON products.id = orders.product_id GROUP BY products.id ORDER BY SUM(quantity) DESC LIMIT 5';
 
             const result = await conn.query(sql);
             conn.release();
@@ -66,7 +66,7 @@ export class DashboardQueries{
             return result.rows
         }
         catch(err){
-            throw new Error(`unable get products by price: ${err}`)
+            throw new Error(`unable get five most popular products: ${err}`)
         }
     }
 }
