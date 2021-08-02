@@ -16,6 +16,7 @@ const create = async (_req: Request, res: Response) => {
 
         res.json(newOrder)
     } catch(err) {
+        console.log(err)
         res.status(400)
         res.json(err)
     }
@@ -28,6 +29,7 @@ const index = async (_req: Request, res: Response) => {
   
 const show = async (req: Request, res: Response) => {
       const customReq = req as RequestCustom
+      /*
       console.log(customReq.decodeJwt)
       if(customReq.decodeJwt.user.id == req.params.id){
           console.log('id is same')
@@ -35,6 +37,7 @@ const show = async (req: Request, res: Response) => {
       else{
           console.log('id is different')
       }
+      */
      const product = await store.show(req.params.id)
      res.json(product)
   }

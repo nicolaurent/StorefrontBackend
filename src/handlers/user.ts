@@ -43,7 +43,7 @@ const authenticate = async (_req: Request, res: Response) => {
 
         const authUser = await store.authenticate(user.username, user.password)
         var token = jwt.sign({user: authUser}, process.env.TOKEN_SECRET!)
-        res.json(token)
+        res.json({'token': token})
     } catch(err) {
         res.status(400)
         res.json(err)

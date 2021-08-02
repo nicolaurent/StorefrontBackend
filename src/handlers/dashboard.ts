@@ -18,12 +18,12 @@ const productByCategory = async (_req:Request, res: Response) => {
 }
 
 const orderByUserId = async (_req:Request, res: Response) => {
-    const orders = await dashboard.orderByUserId(_req.body.userId);
+    const orders = await dashboard.orderByUserId(_req.body.user_id);
     res.json(orders);
 }
 
 const completedOrderByUserId = async (_req:Request, res: Response) => {
-    const orders = await dashboard.completedOrderByUserId(_req.body.userId);
+    const orders = await dashboard.completedOrderByUserId(_req.body.user_id);
     res.json(orders);
 }
 
