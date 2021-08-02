@@ -9,7 +9,8 @@ const create = async (_req: Request, res: Response) => {
     try {
         const product: Product = {
             name: _req.body.name,
-            price: _req.body.price
+            price: _req.body.price,
+            category: _req.body.category ?? null
         }
         const newOrder = await store.create(product)
 

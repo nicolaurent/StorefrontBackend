@@ -42,7 +42,7 @@ export class DashboardQueries{
         try{
             // @ts-ignore
             const conn = await Client.connect();
-            const sql = 'SELECT * FROM orders where user_id = ($1) AND status = "complete"';
+            const sql = 'SELECT * FROM orders where user_id = ($1) AND status = \'complete\'';
 
             const result = await conn.query(sql, [userId]);
             conn.release();
