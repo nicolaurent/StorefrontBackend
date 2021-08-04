@@ -291,6 +291,7 @@ In root directory, run the following
   ```
   http://localhost:3000/orders/:id/products
   ```
+  *Need to put bearer token in the header*
 
   Request body
     ```

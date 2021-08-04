@@ -116,6 +116,7 @@ describe('Test endpoint responses', () => {
 
           it('Authorized addProduct order endpoint', async () => {
             const response = await request.post('/orders/1/products')
+            .send({'quantity':5, 'product_id':'1'})
             .set('Authorization', 'Bearer ' + token);
             expect(response.status).toBe(200);
           });
