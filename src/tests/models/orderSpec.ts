@@ -22,16 +22,12 @@ describe('Order model', () => {
     it('create method should add 1 order', async() =>{
         const result = await store.create({
             status: 'active',
-            user_id: '1',
-            product_id: '1',
-            quantity:5
+            user_id: '1'
         })
         expect(result).toEqual({
             id:1,
             status: 'active',
-            user_id: '1',
-            product_id: '1',
-            quantity:5
+            user_id: '1'
         });
     })
 
@@ -40,9 +36,7 @@ describe('Order model', () => {
         expect(result).toEqual([{
             id:1,
             status: 'active',
-            user_id: '1',
-            product_id: '1',
-            quantity:5
+            user_id: '1'
         }])
     })
 
@@ -51,9 +45,17 @@ describe('Order model', () => {
         expect(result).toEqual({
             id:1,
             status: 'active',
-            user_id: '1',
-            product_id: '1',
-            quantity:5
+            user_id: '1'
+        })
+    })
+
+    it('addProduct method should add 1 order_product', async () => {
+        const result = await store.addProduct(1, '1', '1');
+        expect(result).toEqual({
+            id:1,
+            quantity:1, 
+            product_id: '1', 
+            order_id: '1'
         })
     })
 })

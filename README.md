@@ -30,6 +30,12 @@ Install dependencies
   npm install
   ```
 
+Setup Database
+
+  ```
+  db-migrate up
+  ```
+
 ## Run test 
 
   ```
@@ -227,9 +233,7 @@ In root directory, run the following
     ```
     {
       "status": <active or complete (string)>,
-      "product_id": <product_id (string)>,
       "user_id": <user_id (string)>,
-      "quantity": <product_quantity (integer)>
     }
     ```
   Response
@@ -237,9 +241,7 @@ In root directory, run the following
     {
       "id": <order_id>,
       "status": <active or complete>,
-      "product_id": <product_id>,
       "user_id": <user_id>,
-      "quantity": <product_quantity>
     }
     ```
   
@@ -257,16 +259,12 @@ In root directory, run the following
       {
         "id": <order_id1>,
         "status": <active or complete>,
-        "product_id": <product_id>,
         "user_id": <user_id>,
-        "quantity": <product_quantity>
       },
       {
         "id": <order_id2>,
         "status": <active or complete>,
-        "product_id": <product_id>,
         "user_id": <user_id>,
-        "quantity": <product_quantity>
       },
       ....
     ]
@@ -285,9 +283,30 @@ In root directory, run the following
     {
       "id": <order_id>,
       "status": <active or complete>,
-      "product_id": <product_id>,
       "user_id": <user_id>,
-      "quantity": <product_quantity>
+    }
+    ```
+
+- Add product to order (POST)
+  ```
+  http://localhost:3000/orders/:id/products
+  ```
+
+  Request body
+    ```
+    {
+      "quantity": <product quantity (number)>,
+      "product_id": <product_id (string)>,
+    }
+    ```
+
+  Response
+    ```
+    {
+      "id": <order_id>,
+      "quantity": <product quantity>,
+      "product_id": <product_id>,
+      "order_id": <order_id>
     }
     ```
 
