@@ -63,7 +63,9 @@ In root directory, run the following
   ```
   npm run start
   ```
-  
+
+*Note: Backend server is running at port 3000, Database server is running at port 5432*
+
 ### API List
 #### 1. User API
 - Create new user (POST)
