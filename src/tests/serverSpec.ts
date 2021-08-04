@@ -109,6 +109,17 @@ describe('Test endpoint responses', () => {
             expect(response.status).toBe(200);
           });
 
+          it('Unauthorized addProduct order endpoint', async () => {
+            const response = await request.post('/orders/1/products');
+            expect(response.status).toBe(401);
+          });
+
+          it('Authorized addProduct order endpoint', async () => {
+            const response = await request.post('/orders/1/products')
+            .set('Authorization', 'Bearer ' + token);
+            expect(response.status).toBe(200);
+          });
+
     });
 
     describe('Dashboard endpoint', () => {
